@@ -17,9 +17,9 @@ class PropertiesController < ApplicationController
     if params[:start_date] && params[:end_date]
       range = Date.new(params[:start_date])..Date.new(params[:end_date])
     end
-    @visits = @property.visits.where(created_at: range).group_by_day(:created_at).count
-    @impressions = @property.impressions.where(created_at: range).group_by_day(:created_at).count
-    @consents = @property.consents.where(created_at: range).group_by_day(:created_at).count
+    @visits = @property.visits.where(user_type: "NEW").group_by_day(:created_at).count
+    @impressions = @property.impressions.where(user_type: "NEW").group_by_day(:created_at).count
+    @consents = @property.consents.where(user_type: "NEW").group_by_day(:created_at).count
   end
   
   def required_optin
@@ -27,8 +27,8 @@ class PropertiesController < ApplicationController
     if params[:start_date] && params[:end_date]
       range = Date.new(params[:start_date])..Date.new(params[:end_date])
     end
-    @required = @property.consents.where(created_at: range).where('preferences LIKE ?', '%0%').count
-    @impressions = @property.impressions.where(created_at: range).count
+    @required = @property.consents.where('user_type = ? AND preferences LIKE ?', 'NEW', '%0%').count
+    @impressions = @property.impressions.where(user_type: "NEW").count
   end
 
   def functional_optin
@@ -36,8 +36,8 @@ class PropertiesController < ApplicationController
     if params[:start_date] && params[:end_date]
       range = Date.new(params[:start_date])..Date.new(params[:end_date])
     end
-    @functional = @property.consents.where(created_at: range).where('preferences LIKE ?', '%1%').count
-    @impressions = @property.impressions.where(created_at: range).count
+    @functional = @property.consents.where('user_type = ? AND preferences LIKE ?', 'NEW', '%1%').count
+    @impressions = @property.impressions.where(user_type: "NEW").count
   end
 
   def advertising_optin
@@ -45,8 +45,8 @@ class PropertiesController < ApplicationController
     if params[:start_date] && params[:end_date]
       range = Date.new(params[:start_date])..Date.new(params[:end_date])
     end
-    @advertising = @property.consents.where(created_at: range).where('preferences LIKE ?', '%2%').count
-    @impressions = @property.impressions.where(created_at: range).count
+    @advertising = @property.consents.where('user_type = ? AND preferences LIKE ?', 'NEW', '%2%').count
+    @impressions = @property.impressions.where(user_type: "NEW").count
   end
 
   def bounce
@@ -54,8 +54,8 @@ class PropertiesController < ApplicationController
     if params[:start_date] && params[:end_date]
       range = Date.new(params[:start_date])..Date.new(params[:end_date])
     end
-    @impressions = @property.impressions.where(created_at: range).count
-    @required = @property.consents.where(created_at: range).where('preferences LIKE ?', '%0%').count
+    @impressions = @property.impressions.count
+    @required = @property.consents.where(user_type: "NEW").where('user_type = ? AND preferences LIKE ?', 'NEW', '%0%').count
   end
 
   # GET /properties/new

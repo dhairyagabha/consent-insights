@@ -81,6 +81,6 @@ test:
 #
 production:
   <<: *default
-  database: <%= ENV["CONSENT_INSIGHTS_DATABASE_NAME"] %>
+  database: <%= ENV["CONSENT_INSIGHTS_DATABASE_USERNAME"] %>
   username: <%= ENV["CONSENT_INSIGHTS_DATABASE_USERNAME"] %>
   password: <%= ENV["CONSENT_INSIGHTS_DATABASE_PASSWORD"] %>
