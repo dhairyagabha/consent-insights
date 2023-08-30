@@ -1,0 +1,8 @@
+<%= turbo_frame_tag "required-optin" do %>
+	<div class="card bg-warning-subtle border border-warning">
+    <div class="card-body">
+      <h5 class="card-title">Required Opt-in</h5>
+      <p class="h1 text-center"><%= number_to_percentage((@required.to_f/@impressions.to_f)*100) %></p>
+    </div>
+  </div>
+<% end %>

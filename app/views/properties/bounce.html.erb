@@ -1,0 +1,8 @@
+<%= turbo_frame_tag "bounce-rate" do %>
+	<div class="card bg-danger-subtle border border-danger">
+    <div class="card-body">
+      <h5 class="card-title">Bounce Rate</h5>
+      <p class="h1 text-center"><%= number_to_percentage(((@impressions.to_f - @required.to_f)/@impressions.to_f)*100) %></p>
+    </div>
+  </div>
+<% end %>

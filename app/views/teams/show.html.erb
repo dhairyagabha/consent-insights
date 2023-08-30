@@ -1,0 +1,22 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <div class="d-flex align-items-end">
+    <h2 class="m-0"><%= @team.name %>&nbsp;Team</h2>
+  </div>
+  <div class="actions d-flex">
+    <div id="team-actions">
+      <%= link_to teams_path, class: "btn btn-default" do %>
+        <i class="fas fa-arrow-left"></i>&nbsp;&nbsp;All Teams
+      <% end %>
+      <%= render partial: "teams/add_user", locals: {team: @team} %>
+    </div>
+    <div id="admin-actions">
+      <%= link_to "Edit", edit_team_path(@team), class: 'btn btn-primary' if current_user.admin? %>
+      <%= link_to "Delete", team_path(@team), method: :delete, data:{confirm: "Are you sure? This will also delete all team member associations." }, class: 'btn btn-danger' if current_user.admin? %>
+    </div>
+  </div>
+</div>
+<%= turbo_frame_tag "#{@team.id}-team-add-users", src: teams_users_team_path(@team) %>
+
+<div class="row" id="<%= @team.id %>-team-users">
+  <%= render partial: "teams/team_user", collection: @team_users, as: :tu %>
+</div>

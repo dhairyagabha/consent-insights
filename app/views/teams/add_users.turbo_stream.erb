@@ -1,0 +1,12 @@
+<%= turbo_stream.append "#{@team.id}-team-users" do %>
+  <%= render partial: "teams/team_user", collection: @new_users, as: :tu %>
+  <script>
+    document.querySelector("#teamMembers .btn-close").click();
+  </script>
+<% end %> 
+<%= turbo_stream.replace "#{@team.id}-team-add-users" do %>
+  <%= turbo_frame_tag "#{@team.id}-team-add-users", src: teams_users_team_path(@team) %>
+<% end %>
+<% if @other_users.empty? %>
+  <%= turbo_stream.remove "add-#{@team.id}-team-users" %>
+<% end %>

@@ -1,0 +1,8 @@
+<%= turbo_frame_tag "advertising-optin" do %>
+	<div class="card bg-primary-subtle border border-primary">
+    <div class="card-body">
+      <h5 class="card-title">Advertising Opt-in</h5>
+      <p class="h1 text-center"><%= number_to_percentage((@advertising.to_f/@impressions.to_f)*100) %></p>
+    </div>
+  </div>
+<% end %>

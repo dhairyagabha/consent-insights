@@ -1,0 +1,20 @@
+<div class="card ms-2 me-2 p-0 d-flex flex-row col-md-3" id="<%= dom_id tu %>">
+  <div class="card-body">
+    <h6 class="card-title"><%= tu.name %></h6>
+    <p class="card-text"><%= tu.email %></p>
+    <div class="d-flex">
+      <% if(!tu.team_admin? @team) %>
+        <%= link_to teams_users_team_path(user_id: tu.id, admin: true), method: :put, class: "btn btn-success me-2", data: {confirm: "If you promote to admin, they can manage team users. Are you sure?"} do %>
+          <i class="fas fa-user-graduate pe-2"></i> Promote to Admin
+        <% end %>
+      <% else %>
+        <%= link_to teams_users_team_path(user_id: tu.id, admin: false), method: :put, class: "btn btn-secondary me-2", data: {confirm: "They will loose the ability to manage team. Are you sure?"} do %>
+          <i class="fas fa-user-minus pe-2"></i> Downgrade to User
+        <% end %>
+      <% end %>
+      <%= link_to teams_users_team_path(user_id: tu.id), method: :delete, class: "btn btn-outline-secondary", data: {confirm: "Are you sure you want to remove the user?"} do %>
+        <i class="fas fa-trash"></i>
+      <% end %>
+    </div>
+  </div>
+</div>

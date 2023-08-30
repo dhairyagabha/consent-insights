@@ -1,0 +1,37 @@
+# == Schema Information
+#
+# Table name: visits
+#
+#  id          :bigint           not null, primary key
+#  visit_id    :string           not null
+#  property_id :bigint           not null
+#  country     :string(4)        not null
+#  language    :string(4)        not null
+#  user_type   :string           default("NEW"), not null
+#  preferences :string(10)
+#  user_agent  :string
+#  title       :string
+#  url         :string
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+
+one:
+  visit_id: MyString
+  property: one
+  country: MyString
+  language: MyString
+  usert_type: 1
+  title: MyString
+  url: MyString
+  preferences: MyString
+
+two:
+  visit_id: MyString
+  property: two
+  country: MyString
+  language: MyString
+  usert_type: 1
+  title: MyString
+  url: MyString
+  preferences: MyString

@@ -1,0 +1,39 @@
+<%= form_with(model: property) do |form| %>
+  <% if property.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(property.errors.count, "error") %> prohibited this property from being saved:</h2>
+
+      <ul>
+      <% property.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= form.label :name, class: 'form-label' %>
+      <%= form.text_field :name, class: 'form-control' %>
+    </div>
+
+  <div class="mb-3">
+    <%= form.label :domain, class: 'form-label' %>
+      <%= form.text_field :domain, class: 'form-control' %>
+    </div>
+
+  <div class="mb-3">
+    <% if property.persisted? %>
+      <div class="float-end">
+        <%= link_to 'Destroy', property, method: :delete, class: "text-danger", data: { confirm: 'Are you sure?' } %>
+      </div>
+    <% end %>
+
+    <%= form.submit class: 'btn btn-primary' %>
+
+    <% if property.persisted? %>
+      <%= link_to "Cancel", property, class: "btn btn-link" %>
+    <% else %>
+      <%= link_to "Cancel", properties_path, class: "btn btn-link" %>
+    <% end %>
+  </div>
+<% end %>

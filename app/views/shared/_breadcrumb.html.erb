@@ -1,0 +1,8 @@
+<ol class="breadcrumb p-3 m-0 container mx-auto">
+	<li class="breadcrumb-item">
+		<%= link_to root_path do %>
+      <span><i class="fas fa-home" aria-hidden="true"></i></span><span class="visually-hidden">All Properties</span>
+    <% end %>
+	</li>
+	<%= yield :breadcrumbs %>
+</ol>

@@ -11,6 +11,8 @@
     "autoprefixer": "^10.4.15",
     "bootstrap": "^5.3.1",
     "bootstrap-icons": "^1.10.5",
+    "chartkick": "^5.0.1",
+    "chat.js": "^1.0.2",
     "chokidar": "^3.5.3",
     "esbuild": "^0.19.2",
     "esbuild-rails": "^1.0.7",

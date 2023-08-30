@@ -1,0 +1,53 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <div class="d-flex align-items-end">
+    <h2 class="m-0"><%= @property.name %></h2>
+    <small class="mb-1 ms-2 text-primary">(<%= @property.domain %>)</small>
+  </div>
+  <div>
+    <%= render partial:"properties/permitted_teams", locals:{teams: @property.teams} %>
+    <%= button_tag class: "btn btn-default", data: {"bs-toggle": "modal", "bs-target": "#propertyCredentials"} do %>
+      <i class="fas fa-key"></i>
+      <span class="d-none d-md-inline">&nbsp;&nbsp;Creds</span>
+    <% end %>
+    <%= link_to "Edit", edit_property_path(@property), class: 'btn btn-primary' if current_user.admin? %>
+  </div>
+</div>
+<div class="modal modal-lg fade" id="propertyCredentials" tabindex="-1" aria-labelledby="propertyCredentials" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel"><%= @property.name %> API Credentials</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body d-flex flex-column">
+        <div class="mb-3">
+          <label for="apiKey" class="form-label">API Key</label>
+          <input type="text" class="form-control" id="apiKey" value="<%= @property.api_key %>" disabled>
+        </div>
+        <div class="mb-3">
+          <label for="secret" class="form-label">Secret</label>
+          <input type="text" class="form-control" id="apiKey" value="<%= @property.secret %>" disabled>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row mb-4">
+  <h2 class="h3">New Visitors</h2>
+  <p>Visitors who visit the site and consent for the first time. They may be net new to the site or may have bounced previously.</p>
+  <div class="col-12">
+    <%= turbo_frame_tag "visits", src: global_visits_property_path %>
+  </div>
+  <div class="col col-sm-12 col-md-6 col-lg-3 mt-4 mb-4 mb-lg-0">
+    <%= turbo_frame_tag "required-optin", src: required_optin_property_path %>
+  </div>
+  <div class="col col-sm-12 col-md-6 col-lg-3 mt-4 mb-4 mb-lg-0">
+    <%= turbo_frame_tag "functional-optin", src: functional_optin_property_path %>
+  </div>
+  <div class="col col-sm-12 col-md-6 col-lg-3 mt-4 mb-4 mb-lg-0">
+    <%= turbo_frame_tag "advertising-optin", src: advertising_optin_property_path %>
+  </div>
+  <div class="col col-sm-12 col-md-6 col-lg-3 mt-4 mb-4 mb-lg-0">
+    <%= turbo_frame_tag "bounce-rate", src: bounce_property_path %>
+  </div>
+</div>

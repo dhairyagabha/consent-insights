@@ -1,0 +1,12 @@
+<%= turbo_frame_tag "impressions" do %>
+	<div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Impressions per Day</h5>
+      <%= line_chart [
+        {name: "2023-08-23",data: {impressions: 10,required: 9,functional: 6,advertising: 5}},
+        {name: "2023-08-24",data: {impressions: 15,required: 8,functional: 6,advertising: 5}},
+        {name: "2023-08-25",data: {impressions: 18,required: 6,functional: 6,advertising: 5}}
+      ], xtitle: "Days", ytitle: "Impressions" %>
+    </div>
+  </div>
+<% end %>

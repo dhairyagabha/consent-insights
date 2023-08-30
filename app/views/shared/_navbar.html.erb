@@ -18,8 +18,9 @@
       </ul>
 
       <ul class="navbar-nav">
-        <li class="nav-item"><%= link_to "What's New", announcements_path, class: "nav-link #{unread_announcements(current_user)}" %></li>
         <% if user_signed_in? %>
+
+          <li class="nav-item"><%= link_to "Properties", properties_path, class: "nav-link" %></li>
 
           <li class="nav-item">
             <%= link_to notifications_path, class: "nav-link" do %>
@@ -35,6 +36,7 @@
               <%= link_to "Settings", edit_user_registration_path, class: "dropdown-item" %>
               <% if current_user.admin? && respond_to?(:madmin_root_path) %>
                 <div class="dropdown-divider"></div>
+                <%= link_to "Teams", teams_path, class: "dropdown-item" %>
                 <%= link_to "Admin Area", madmin_root_path, class: "dropdown-item" %>
               <% end %>
               <div class="dropdown-divider"></div>
@@ -43,6 +45,7 @@
           </li>
 
         <% else %>
+          <li class="nav-item"><%= link_to "What's New", announcements_path, class: "nav-link #{unread_announcements(current_user)}" %></li>
           <li class="nav-item"><%= link_to "Sign Up", new_user_registration_path, class: "nav-link" %></li>
           <li class="nav-item"><%= link_to "Login", new_user_session_path, class: "nav-link" %></li>
         <% end %>

@@ -1,0 +1,7 @@
+<%= turbo_stream.remove "user_#{@user_id}" %>
+<%= turbo_stream.append "team-actions" do %>
+	<%= render partial: "teams/add_user", locals: {team: @team} %>
+<% end %>
+<%= turbo_stream.replace "#{@team.id}-team-add-users" do %>
+	<%= turbo_frame_tag "#{@team.id}-team-add-users", src: teams_users_team_path(@team) %>
+<% end %>

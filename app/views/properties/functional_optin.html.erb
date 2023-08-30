@@ -1,0 +1,8 @@
+<%= turbo_frame_tag "functional-optin" do %>
+	<div class="card bg-info-subtle border border-info">
+    <div class="card-body">
+      <h5 class="card-title">Functional Opt-in</h5>
+      <p class="h1 text-center"><%= number_to_percentage((@functional.to_f/@impressions.to_f)*100) %></p>
+    </div>
+  </div>
+<% end %>

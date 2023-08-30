@@ -1,0 +1,33 @@
+<%= turbo_frame_tag "#{@team.id}-team-add-users" do %>
+  <% if @users.any? %>
+    <%= form_with url: teams_users_team_path, class:"modal modal-lg fade", id:"teamMembers", method: :post do %>
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel"><%= @team.name %> Team</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body d-flex flex-column">
+            <div class="list-group list-group-checkable">
+              <% @users.each do |u| %>
+                <%= label_tag "team[users][]", {class: "list-group-item d-flex gap-3", for:"team_users_#{u.id}"} do %>
+                  <%= check_box_tag "team[users][]", u.id, false, {class: "form-check-input flex-shrink-0", id: "team_users_#{u.id}"} %>
+                  <span class="form-checked-content">
+                    <%= image_tag avatar_path(u, size: 40), height: 20, width: 20, class: "rounded-circle" %>
+                    <span class="h-3"><%= u.name %></span>
+                  </span>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <%= button_tag "Close", type: :reset, class: "btn btn-secondary", data: {"bs-dismiss": "modal"} %>
+            <%= submit_tag "Add Users", class: "btn btn-primary" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <%= turbo_stream.remove "add-#{@team.id}-team-users" %>
+  <% end %>
+<% end %>

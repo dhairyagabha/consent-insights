@@ -1,0 +1,37 @@
+<%= form_with(model: team) do |form| %>
+  <% if team.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(team.errors.count, "error") %> prohibited this team from being saved:</h2>
+
+      <ul>
+      <% team.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form.hidden_field :user_id, value: current_user.id %>
+
+  <div class="mb-3">
+    <%= form.label :name, class: 'form-label' %>
+    <%= form.text_field :name, class: 'form-control' %>
+  </div>
+
+
+  <div class="mb-3">
+    <% if team.persisted? %>
+      <div class="float-end">
+        <%= link_to 'Destroy', team, method: :delete, class: "text-danger", data: { confirm: 'Are you sure?' } %>
+      </div>
+    <% end %>
+
+    <%= form.submit class: 'btn btn-primary' %>
+
+    <% if team.persisted? %>
+      <%= link_to "Cancel", team, class: "btn btn-link" %>
+    <% else %>
+      <%= link_to "Cancel", teams_path, class: "btn btn-link" %>
+    <% end %>
+  </div>
+<% end %>

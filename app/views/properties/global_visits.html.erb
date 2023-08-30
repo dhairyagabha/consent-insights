@@ -1,0 +1,12 @@
+<%= turbo_frame_tag "visits" do %>
+	<div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Global Visits</h5>
+      <%= line_chart([
+          {name: "Visits", data: @visits},
+          {name: "Impressions", data: @impressions},
+          {name: "Consents", data: @consents}
+      ]) %>
+    </div>
+  </div>
+<% end %>
